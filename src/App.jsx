@@ -6,7 +6,7 @@ import Header from './assets/components/Header/Header'
 import Shop from './assets/components/shop/Shop'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <div>
