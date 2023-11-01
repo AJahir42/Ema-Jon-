@@ -17,13 +17,37 @@ const Shop = () => {
     },[])
 
     useEffect(()=>{
+        // console.log('products', products)
+        /*eikhane products ta console log nao hote pare because products ta load hoy useEffect theke ,ar etao 
+        useEffect e ase, both of the are asynchronus. Tai akta dependecy set kore dite hobe, then console logito 
+        hobe*/ 
         const storedCart=getShoppingCart()
-        console.log(storedCart)
-    },[])
+        const savedCart=[]
+
+        // step-1 get id 
+        for(const id in storedCart){
+            // step-2: get the product by using id
+            const addedProduct=products.find(product=>product.id===id)
+            // console.log(addedProduct)
+            // step-3: get & set quantity of the product
+            if(addedProduct){
+                const quantity=storedCart[id];
+                addedProduct.quantity=quantity;
+            //step-4: add the addedproduct to the savedcart
+                savedCart.push(addedProduct)
+                
+            }
+            // console.log(addedProduct)
+        }
+        // step-5 Set the cart
+        setCart(savedCart)
+
+    },[products])
 
     const handleAddToCart=(product)=>{
         const newCart=[...cart,product]
         setCart(newCart)
+
         addToDb(product.id)
     }
 
